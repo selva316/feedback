@@ -5,8 +5,11 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<link href="assets/css/bootstrap.css" rel="stylesheet">
 		<link href="assets/css/bootstrap-responsive.css" rel="stylesheet">
+		<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+		
 		<link rel="stylesheet" href="css/global.css">
 		<script src="js/jQuery.js"></script>
+		<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 		<script src="assets/js/bootstrap.js"></script>
 	</head>
 	<style>
@@ -18,6 +21,12 @@
 			#main{
 				width: 90%
 			}
+			.rmobile{
+				background: #a901db none repeat scroll 0 0; border: medium solid #a901db; border-radius: 49%; color: #fff; padding: 7px 13px; width: 1%;
+			}
+			.rage{
+				width: 1%;
+			}
 		}
      
 		/* Portrait tablet to landscape and desktop */
@@ -27,6 +36,12 @@
 			}
 			#main{
 				width: 90%
+			}
+			.rmobile{
+				background: #a901db none repeat scroll 0 0; border: medium solid #a901db; border-radius: 49%; color: #fff; padding: 6px 12px; width: 2%;
+			}
+			.rage{
+				width: 1%;
 			}
 		}
 		 
@@ -38,9 +53,11 @@
 			#main{
 				width: 90%
 			}
-			#mobile0{
-				width:2%;
-				padding: 6px 12px;
+			.rmobile{
+				width: 2%;
+			}
+			.rage{
+				width: 2%;
 			}
 		}
 		 
@@ -51,6 +68,12 @@
 			}
 			#main{
 				width: 90%
+			}
+			.rmobile{
+				background: #a901db none repeat scroll 0 0; border: medium solid #a901db; border-radius: 49%; color: #fff; padding: 7px 13px; width: 1%;
+			}
+			.rage{
+				width: 1%;
 			}
 		}
 		
@@ -64,85 +87,27 @@
 			#main{
 				width: 90%
 			}
+			.rmobile{
+				background: #a901db none repeat scroll 0 0; border: medium solid #a901db; border-radius: 49%; color: #fff; padding: 6px 12px; width: 2%;
+			}
+			.rage{
+				width: 1%;
+			}
+			
 		}
 		
 		
-		.rmobile{
-			background: #a901db none repeat scroll 0 0; border: medium solid #a901db; border-radius: 49%; color: #fff; padding: 7px 13px; width: 1%;
-		}
 	</style>
 	<script>
 		$(document).ready(function(){
-			$("#mobile0").on("input",function(){
-				if($("#mobile0").val().replace(/ /g,'').length == 1)
-				{
-					$("#mobile1").focus();
-				}
+			$("#dob").datepicker({
+				dateFormat:"dd-mm-yy",
+				yearRange: '1920:2020',
+				minDate: "01-01-1900",
+				maxDate: new Date(),
+				changeMonth: true,
+				changeYear: true
 			});
-			
-			$("#mobile1").on("input",function(){
-				if($("#mobile1").val().replace(/ /g,'').length == 1)
-				{
-					$("#mobile2").focus();
-				}
-			});
-			
-			$("#mobile2").on("input",function(){
-				if($("#mobile2").val().replace(/ /g,'').length == 1)
-				{
-					$("#mobile3").focus();
-				}
-			});
-			
-			$("#mobile3").on("input",function(){
-				if($("#mobile3").val().replace(/ /g,'').length == 1)
-				{
-					$("#mobile4").focus();
-				}
-			});
-			
-			$("#mobile4").on("input",function(){
-				if($("#mobile4").val().replace(/ /g,'').length == 1)
-				{
-					$("#mobile5").focus();
-				}
-			});
-			
-			$("#mobile5").on("input",function(){
-				if($("#mobile5").val().replace(/ /g,'').length == 1)
-				{
-					$("#mobile6").focus();
-				}
-			});
-			
-			$("#mobile6").on("input",function(){
-				if($("#mobile6").val().replace(/ /g,'').length == 1)
-				{
-					$("#mobile7").focus();
-				}
-			});
-			
-			$("#mobile7").on("input",function(){
-				if($("#mobile7").val().replace(/ /g,'').length == 1)
-				{
-					$("#mobile8").focus();
-				}
-			});
-			
-			$("#mobile8").on("input",function(){
-				if($("#mobile8").val().replace(/ /g,'').length == 1)
-				{
-					$("#mobile9").focus();
-				}
-			});
-			
-			$("#age0").on("input",function(){
-				if($("#age0").val().replace(/ /g,'').length == 1)
-				{
-					$("#age1").focus();
-				}
-			});
-			
 		});
 	</script>
 <body>
@@ -166,16 +131,10 @@
 			<div class="control-group">
 				<label class="control-label" for="inputInput" style="font-weight:bold">Mobile (Customer ID)</label>
 				<div class="controls">
-					<input type="text" id="mobile0" class="rmobile" maxlength="1" style="background: #a901db none repeat scroll 0 0; border: medium solid #a901db; border-radius: 49%; color: #fff; padding: 7px 13px; width: 1%;">
-					<input type="text" id="mobile1" class="rmobile" maxlength="1" style="background: #a901db none repeat scroll 0 0; border: medium solid #a901db; border-radius: 49%; color: #fff; padding: 7px 13px; width: 1%;">
-					<input type="text" id="mobile2" class="rmobile" maxlength="1" style="background: #a901db none repeat scroll 0 0; border: medium solid #a901db; border-radius: 49%; color: #fff; padding: 7px 13px; width: 1%;">
-					<input type="text" id="mobile3" class="rmobile" maxlength="1" style="background: #a901db none repeat scroll 0 0; border: medium solid #a901db; border-radius: 49%; color: #fff; padding: 7px 13px; width: 1%;">
-					<input type="text" id="mobile4" class="rmobile" maxlength="1" style="background: #a901db none repeat scroll 0 0; border: medium solid #a901db; border-radius: 49%; color: #fff; padding: 7px 13px; width: 1%;">
-					<input type="text" id="mobile5" class="rmobile" maxlength="1" style="background: #a901db none repeat scroll 0 0; border: medium solid #a901db; border-radius: 49%; color: #fff; padding: 7px 13px; width: 1%;">
-					<input type="text" id="mobile6" class="rmobile" maxlength="1" style="background: #a901db none repeat scroll 0 0; border: medium solid #a901db; border-radius: 49%; color: #fff; padding: 7px 13px; width: 1%;">
-					<input type="text" id="mobile7" class="rmobile" maxlength="1" style="background: #a901db none repeat scroll 0 0; border: medium solid #a901db; border-radius: 49%; color: #fff; padding: 7px 13px; width: 1%;">
-					<input type="text" id="mobile8" class="rmobile" maxlength="1" style="background: #a901db none repeat scroll 0 0; border: medium solid #a901db; border-radius: 49%; color: #fff; padding: 7px 13px; width: 1%;">
-					<input type="text" id="mobile9" class="rmobile" maxlength="1" style="background: #a901db none repeat scroll 0 0; border: medium solid #a901db; border-radius: 49%; color: #fff; padding: 7px 13px; width: 1%;">
+					<div class="input-prepend">
+						<span class="add-on"><i class="icon-road"></i></span>
+						<input type="text" id="mobile" name="mobile" maxlength="10" placeholder="Mobile">
+					</div>
 				</div>
 			</div>
 			
@@ -190,30 +149,132 @@
 			</div>
 
 			<div class="control-group">
-				<label class="control-label" for="inputInput" style="font-weight:bold">Age</label>
+				
+				<label class="control-label" for="inputInput" style="font-weight:bold">Date of Birth</label>
 				<div class="controls">
-					
-					<input type="text" id="age0" maxlength="1" style="background: #FF9000 none repeat scroll 0 0; border: medium solid #FF9000; border-radius: 49%; color: #fff; padding: 7px 13px; width: 1%;">
-					<input type="text" id="age1" maxlength="1" style="background: #FF9000 none repeat scroll 0 0; border: medium solid #FF9000; border-radius: 49%; color: #fff; padding: 7px 13px; width: 1%;">
+					<div class="input-prepend">
+						<span class="add-on"><i class="icon-eye-open"></i></span>
+						<input type="text" id="dob" name="dob" placeholder="Date of Birth">
+					</div>
 				</div>
 			</div>
-			<!--
-			<div class="col-sm-9">
-				<div class="btn-group" data-toggle="buttons">
-					<label class="btn btn-default">
-						<input type="radio" id="q156" name="quality[25]" value="1" /> 1
-					</label>
-					<label class="btn btn-default">
-						<input type="radio" id="q156" name="quality[25]" value="1" /> 2
-					</label>
-					<label class="btn btn-default">
-						<input type="radio" id="q156" name="quality[25]" value="1" /> 3
-					</label>
-					<label class="btn btn-default">
-						<input type="radio" id="q156" name="quality[25]" value="1" /> 4
-					</label>
+			
+			<div class="control-group">
+				<label class="control-label" for="inputInput" style="font-weight:bold">I am</label>
+				<div class="controls">
+					<input type="radio" id="radio1" name="radios" value="all" checked>
+					<label for="radio1">Student</label>
+					<input type="radio" id="radio2" name="radios"value="false">
+					<label for="radio2">Professional</label>
+					<input type="radio" id="radio3" name="radios" value="true">
+					<label for="radio3">Corporate</label>
+					<input type="radio" id="radio4" name="radios" value="true">
+					<label for="radio4">Govt. Employee</label>
+					<input type="radio" id="radio5" name="radios" value="true">
+					<label for="radio5">Teaching Faculty</label>
+					<input type="radio" id="radio6" name="radios" value="true">
+					<label for="radio6">None of these</label>
+				</div>	
+			</div>
+			
+			<div class="control-group">
+				<label class="control-label" for="inputInput" style="font-weight:bold">I am interested in </label>
+				<div class="controls">
+					<input type="checkbox" id="chk5" name="chk" value="true" checked>
+					<label for="chk5">Mac</label>
+					<input type="checkbox" id="chk3" name="chk" value="true">
+					<label for="chk3">iPhone</label>
+					<input type="checkbox" id="chk2" name="chk"value="false">
+					<label for="chk2">iPad</label>
+					<input type="checkbox" id="chk1" name="chk" value="all">
+					<label for="chk1">iPod</label>
+					<input type="checkbox" id="chk4" name="chk" value="true">
+					<label for="chk4">Apple Watch</label>
+					<input type="checkbox" id="chk6" name="chk" value="true">
+					<label for="chk6">Accessories</label>
+				</div>	
+			</div>
+			
+			<div class="control-group">
+				<label class="control-label" for="inputInput" style="font-weight:bold">I am currently using </label>
+				<div class="controls">
+					<input type="checkbox" id="current_chk5" name="chk" value="true" checked>
+					<label for="current_chk5">Mac</label>
+					<input type="checkbox" id="current_chk3" name="chk" value="true">
+					<label for="current_chk3">iPhone</label>
+					<input type="checkbox" id="current_chk2" name="chk"value="false">
+					<label for="current_chk2">iPad</label>
+					<input type="checkbox" id="current_chk1" name="current_chk" value="all">
+					<label for="current_chk1">iPod</label>
+					<input type="checkbox" id="current_chk4" name="chk" value="true">
+					<label for="current_chk4">Apple Watch</label>
+					<input type="checkbox" id="current_chk6" name="chk" value="true">
+					<label for="current_chk6">Accessories</label>
+				</div>	
+			</div>
+			
+			<div class="control-group">
+				<label class="control-label" for="inputInput" style="font-weight:bold">I would rate the sales professional as</label>
+				<div class="controls">
+					<input type="radio" id="sales_radio1" name="sales_radios" value="all" checked>
+					<label for="sales_radio1">Excellent</label>
+					<input type="radio" id="sales_radio2" name="sales_radios"value="false">
+					<label for="sales_radio2">Very Good</label>
+					<input type="radio" id="sales_radio3" name="sales_radios" value="true">
+					<label for="sales_radio3">Good</label>
+					<input type="radio" id="sales_radio4" name="sales_radios" value="true">
+					<label for="sales_radio4">Average</label>
+					<input type="radio" id="sales_radio5" name="sales_radios" value="true">
+					<label for="sales_radio5">Poor</label>
+				</div>	
+			</div>
+			
+			<div class="control-group">
+				<label class="control-label" for="inputInput" style="font-weight:bold">I would rate my overall customer experience as</label>
+				<div class="controls">
+					<input type="radio" id="customer_radio1" name="customer_radios" value="all" checked>
+					<label for="customer_radio1">Excellent</label>
+					<input type="radio" id="customer_radio2" name="customer_radios"value="false">
+					<label for="customer_radio2">Very Good</label>
+					<input type="radio" id="customer_radio3" name="customer_radios" value="true">
+					<label for="customer_radio3">Good</label>
+					<input type="radio" id="customer_radio4" name="customer_radios" value="true">
+					<label for="customer_radio4">Average</label>
+					<input type="radio" id="customer_radio5" name="customer_radios" value="true">
+					<label for="customer_radio5">Poor</label>
+				</div>	
+			</div>
+			
+			<div class="control-group">
+				<label class="control-label" for="inputInput" style="font-weight:bold">I got to you know by</label>
+				<div class="controls">
+					<select>
+					  <option>Paper AD</option>
+					  <option>Apple Website</option>
+					  <option>Electronic Media</option>
+					  <option>Word of Mouth</option>
+					  <option>Social Media</option>
+					</select>
 				</div>
-			</div>-->
+			</div>
+			
+			<div class="control-group">
+				<label class="control-label" for="inputInput" style="font-weight:bold">I appreciate you for</label>
+				<div class="controls">
+					<textarea rows="4" style="width:80%"></textarea>
+				</div>
+			</div>
+			
+			<div class="control-group">
+				<label class="control-label" for="inputInput" style="font-weight:bold">You can serve me better by</label>
+				<div class="controls">
+					<textarea rows="4" style="width:80%"></textarea>
+				</div>
+			</div>
+			
+			<div class="control-group"  align="center">
+				<button type="submit" class="btn btn-primary" >Submit</button>
+			</div>
 		</div>
 	</div>
 </body>
