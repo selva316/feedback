@@ -1,3 +1,10 @@
+<?php
+	session_start();
+	
+	if($_SESSION['role']!='user'){
+		print "<script>window.location.href='login.php';</script>";
+	}
+?>
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -247,6 +254,9 @@
 							<option value="mr">Mr</option>
 							<option value="mrs">Mrs</option>
 						</select>
+						<input type="hidden" id="locid" name="locid" value="<?php echo $_SESSION['location'];?>"/>
+						<input type="hidden" id="username" name="username" value="<?php echo $_SESSION['user'];?>"/>
+						
 						<input type="text" id="name" name="name" placeholder="Name"  style="font-weight:bold">
 					</div>
 				</div>

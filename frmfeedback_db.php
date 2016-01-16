@@ -4,6 +4,9 @@
 	
 	if(isset($_POST))
 	{
+		$userid = $_POST['username'];
+		$locid = $_POST['locid'];
+		
 		$title = $_POST['tile'];
 		$name = $_POST['name'];
 		$mobile = $_POST['mobile'];
@@ -28,6 +31,8 @@
 		
 		$otablefeedback = new GenericTable($dbh,'fb_feedback');
 		$list = Array(
+				'userid'=>$userid,
+				'locid'=>$locid,
 				'title'=>$title,
 				'name'=>$name,
 				'mobile'=>$mobile,
