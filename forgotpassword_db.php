@@ -37,16 +37,30 @@
 		
 		$otablepassword->insertRow($plist);
 		
+		//Email Header
+		$emailheader = "From: ikure <no-reply@iplanet.in>\r\nContent-type: text/html";
 		$to = $mailid;
 		$subject = "Password Reset";
 		$txt = "Your account password has been reset to the following password.<BR/> Password: ".$password;
 		
-		mail($to,$subject,$txt);
-		
+		if(mail($to,$subject,$txt,$emailheader))
+		{?>
+			<script type="text/javascript">
+				alert("Your password has been send to registered mail id.");
+				window.location.href = "login.php"; 
+			</script>
+		<?php	
+		}
+		else
+		{
+		?>
+			<script type="text/javascript">
+				alert("Password reset is failed. Please contact your administrator");
+				window.location.href = "login.php"; 
+			</script>
+			
+		<?php
+		}
 		
 	}
 ?>
-<script type="text/javascript">
-	alert("Your password has been send to registered mail id.");
-    window.location.href = "login.php"; 
-</script>
