@@ -42,10 +42,11 @@
 							<div class="form-group">
 								<label class="control-label">User Name <span style="color:red">*</span></label>
 								<input type="text" id="username" placeholder="User Name" class="form-control" name="username" />
+								<input type="hidden" id="userid" class="form-control" name="userid" value="" />
 							</div>	
 						</div>
 					</div>
-					<div class="row">
+					<div class="row" id="passwordDiv">
 						<div class="col-md-12">
 							<div class="form-group">
 								<label class="control-label">Password <span style="color:red">*</span></label>
@@ -107,10 +108,10 @@
 					<table id="example" class="display" cellspacing="0" width="100%">
 						<thead>
 							<tr>
-								
+								<th>ID</th>
 								<th>User Name</th>
-								
 								<th>Location</th>
+								<th>Action</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -119,11 +120,25 @@
 								$result = $query->fetchAll();
 								foreach($result as $row)
 								{
+									$userid = $row['USERID'];
 									echo "<tr>";
+									echo "<td><a href='javascript:editUser(\"$userid\")'>".$userid."</a></td>";
 									echo "<td>".ucfirst($row['username'])."</td>";
 									$oloctation = new Location($dbh);
 									
 									echo "<td>".ucfirst($oloctation->locationName($row['location']))."</td>";
+									
+									$status = $row['disable'];
+
+									if($row['disable'] == 'Y')
+									{
+
+										echo "<td><a  class='btn btn-success' href='javascript:disableUser(\"$userid\",\"$status\")'>Enable</a></td>";
+									}
+									else{
+										echo "<td><a  class='btn btn-warning' href='javascript:disableUser(\"$userid\",\"$status\")'>Disable</a></td>";
+									}
+
 									echo "</tr>";
 									
 								}
@@ -200,9 +215,16 @@
 	});
 	
 	$("#saveAction").click(function(){
+
+		var url = '';
+		if ($("#saveAction").text() == "Update")
+			url = 'frmUserEdit_dp.php?location='+ $("#location").val()+"&userid="+$("#userid").val();
+		else
+			url = 'frmUser_dp.php?location='+ $("#location").val()+"&username="+$("#username").val()+"&password="+$("#password").val();
+
 		$.ajax({
 			type: 'post',
-			url: 'frmUser_dp.php?location='+ $("#location").val()+"&username="+$("#username").val()+"&password="+$("#password").val(),
+			url: url,
 			success:function(data){
 				//alert("Hi");
 				window.location.href="userdetails.php";
@@ -210,7 +232,72 @@
 		});
 		
 	});
+	
+	$("#finalize").click(function(){
+
+
+		//$('#desModal').modal('show'); 
+		$('.modal-title').html('Add User');
+
+		$("#username").prop('disabled',false);
+		$("#location").prop('disabled',true);
 		
+		
+		$("#passwordDiv").css('display','block');
+
+		$("#saveAction").css('display','block');
+		$("#saveAction").val("Save");
+		$("#saveAction").text("Save");
+		
+		$("#location").val('');
+		$("#username").val('');
+
+		$("#userid").val('');
+
+	});
+
+	function editUser(userid)
+	{
+		
+		$('#desModal').modal('show'); 
+		$('.modal-title').html('Edit User');
+		$.ajax({
+			type: 'post',
+			dataType:'json',
+			data:{'userid':userid},
+			url: 'fetchUser.php',
+			success:function(data){
+				
+				$("#username").prop('disabled',true);
+				$("#location").prop('disabled',false);
+				$("#username").val(data.username);
+				$("#passwordDiv").css('display','none');
+
+				$("#saveAction").css('display','block');
+				$("#saveAction").val("Update");
+				$("#saveAction").text("Update");
+				$("#location").val(data.location);
+
+				$("#userid").val(userid);
+			}
+			
+		});
+	}
+	
+	function disableUser(userid,status)
+	{
+		$.ajax({
+			type: 'post',
+			dataType:'json',
+			data:{'userid':userid,'status':status},
+			url: 'disableUser.php',
+			success:function(data){
+				window.location.href="userdetails.php";
+			}
+			
+		});
+	}
+
 	</script>
   </body>
 </html>

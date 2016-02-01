@@ -20,6 +20,7 @@ class Location {
 	 */
    public $locname;
    
+   public $email;
      /**  Database object
 	 *
 	 * @var object
@@ -51,6 +52,28 @@ class Location {
 		 return $name;
      }
      
+	 /** Check if the Value in the passed checkclause already exists in the Table 
+	 *
+	 *  @param string[] checkclause
+	 *  @return string
+	 */
+   	 public function fetchLocation($locid){
+	
+         $dbh = $this->dbh;
+         $query=$dbh->query("SELECT LOCNAME,EMAIL FROM fb_location WHERE LOCID='".$locid."'");
+   		 $result = $query->fetchAll();
+		 $loc_array = array();
+		 
+		 foreach($result as $r)
+		 {
+			$loc_array['locname'] = $r['LOCNAME'];
+			$loc_array['email'] = $r['EMAIL'];
+		 }
+		 
+		 
+		 return $loc_array;
+     }
+	 
 	 /** Check if the Value in the passed checkclause already exists in the Table 
 	 *
 	 *  @param string[] checkclause

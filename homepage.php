@@ -51,12 +51,13 @@
 							<div class="form-group">
 								<label class="control-label">Email ID <span style="color:red">*</span></label>
 								<input type="text" id="email" placeholder="Email ID" class="form-control" name="email" />
+								<input type="hidden" id="locid" class="form-control" name="locid" value="" />
 							</div>	
 						</div>
 					</div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" id="saveAction" class="btn btn-default" data-dismiss="modal">Update</button>
+                    <button type="button" id="saveAction" class="btn btn-default" data-dismiss="modal" value="save">Save</button>
                 </div>
             </div>
         </div>
@@ -90,6 +91,7 @@
 								<th>Location ID</th>
 								<th>Location Name</th>
 								<th>Email ID</th>
+								<th>Action</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -98,10 +100,23 @@
 								$result = $query->fetchAll();
 								foreach($result as $row)
 								{
+									$locidv = $row['LOCID'];
 									echo "<tr>";
-									echo "<td>".$row['LOCID']."</td>";
+									//echo "<td><a class='info_link' href='javascript:editLocation()'>".$locidv."</a></td>";
+									echo "<td><a href='javascript:editLocation(\"$locidv\")'>".$locidv."</a></td>";
 									echo "<td>".ucfirst($row['LOCNAME'])."</td>";
 									echo "<td>".ucfirst($row['EMAIL'])."</td>";
+									$status = $row['DISABLE'];
+
+									if($row['DISABLE'] == 'Y')
+									{
+
+										echo "<td><a  class='btn btn-success' href='javascript:disableLocation(\"$locidv\",\"$status\")'>Enable</a></td>";
+									}
+									else{
+										echo "<td><a  class='btn btn-warning' href='javascript:disableLocation(\"$locidv\",\"$status\")'>Disable</a></td>";
+									}
+									
 									echo "</tr>";
 									
 								}
@@ -142,14 +157,68 @@
 	
 
 	$("#saveAction").click(function(){
+		var url = '';
+		if ($("#saveAction").text() == "Update")
+			url = 'frmLocationedit_dp.php?location='+ $("#location").val()+"&email="+$("#email").val()+"&locid="+$("#locid").val();
+		else
+			url = 'frmLocation_dp.php?location='+ $("#location").val()+"&email="+$("#email").val();
+		
 		$.ajax({
 			type: 'post',
-			url: 'frmLocation_dp.php?location='+ $("#location").val()+"&email="+$("#email").val(),
+			url: url,
 			success:function(data){
 				window.location.href="homepage.php";
 			}
 		});
 	});
+	
+	$("#finalize").click(function(){
+		$('.modal-title').html('Add Location');
+
+		$("#location").val('');
+		$("#email").val('');
+		$("#saveAction").val("Save");
+		$("#saveAction").text("Save");
+		$("#locid").val('');
+	});
+
+
+	function editLocation(locid)
+	{
+		
+		//var locid = $('.info_link').text();
+		$('#desModal').modal('show'); 
+		$('.modal-title').html('Edit Location');
+		$.ajax({
+			type: 'post',
+			dataType:'json',
+			data:{'location':locid},
+			url: 'fetchLocation.php',
+			success:function(data){
+				
+				$("#location").val(data.locname);
+				$("#email").val(data.email);
+				$("#saveAction").val("Update");
+				$("#saveAction").text("Update");
+				$("#locid").val(locid);
+			}
+			
+		});
+	}
+	
+	function disableLocation(locid,status)
+	{
+		$.ajax({
+			type: 'post',
+			dataType:'json',
+			data:{'location':locid,'status':status},
+			url: 'disableLocation.php',
+			success:function(data){
+				window.location.href="homepage.php";
+			}
+			
+		});
+	}
 		
 	</script>
   </body>

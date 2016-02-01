@@ -74,6 +74,22 @@ class UserDetails {
 			echo "false";
 	}
 	
+	public function fetchUsers($userid){
+
+		$dbh = $this->dbh;
+		$query=$dbh->query("SELECT username,location FROM fb_userdetails WHERE USERID='".$userid."'");
+		$result = $query->fetchAll();
+		$user_array = array();
+
+		foreach($result as $r)
+		{
+			$user_array['username'] = $r['username'];
+			$user_array['location'] = $r['location'];
+		}
+
+
+		return $user_array;
+ 	}
 }
   
 ?>
